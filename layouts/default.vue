@@ -11,8 +11,8 @@
           </nuxt-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-         <nuxt-link to="/affiliate">
-          <v-btn text class="text-capitalize fnt mr-6"
+         <nuxt-link to="/">
+          <v-btn text class="text-capitalize fnt mr-6 hidden-sm-and-down" 
             > Performance Management System</v-btn
           >
         </nuxt-link>

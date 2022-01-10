@@ -196,9 +196,7 @@ export default {
         { text: 'view profile' },
       ],
       body: [
-        {
-          name: 'olumide',
-        },
+        
       ],
       loading: false,
       msg: '',
@@ -258,11 +256,11 @@ export default {
     },
     async getPartners() {
       try {
-        const res = await axios.get(
+        const res = await this.$axios.$get(
           `${this.$config.baseUrl}admin/godmode/emp/viewall`
         )
-        console.log(res.data.data[0].name)
-        this.body = res.data.data
+        console.log(res.data)
+        this.body = res.data
       } catch (error) {
         console.log(error.response)
       }
@@ -270,7 +268,7 @@ export default {
     async add_partner() {
       this.loading = true
       try {
-        const res = await axios.post(
+        const res = await this.$axios.$post(
           `${this.$config.baseUrl}admin/godmode/emp/create`,
           {
             name: this.name,
@@ -287,7 +285,7 @@ export default {
         )
         console.log(res)
         this.loading = false
-        this.msg = res.data.msg
+        this.msg = res.msg
         this.snackbar = true
       } catch (error) {
         console.log(error.response)

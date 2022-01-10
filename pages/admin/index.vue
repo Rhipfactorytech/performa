@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="center" align="center" class="mt-10">
+    <v-row justify="center" align="center" class="mt-10 hidden-sm-and-down" >
       <v-col cols="12" sm="8" md="6">
         <v-card height="550">
           <v-row justify="center" align="center" class="pt-8">
@@ -51,6 +51,68 @@
         </v-card>
       </v-col>
     </v-row>
+    <!-- mobile version -->
+
+  <v-row justify="center" align="center" class="hidden-md-and-up mt-0" >
+      <v-col cols="12" >
+        <v-card height="550">
+          <v-row justify="center" align="center" class="pt-8">
+            <v-col cols="12">
+              <p class="fnt text-capitalize text-center font-weight-bold">
+                enter your details to log in
+              </p>
+            </v-col>
+          </v-row>
+
+          <v-row justify="center" align="center" class="pt-5">
+            <v-col>
+              <v-text-field
+                label="Password"
+                type="password"
+                outlined
+                color="#5465FF"
+                class=" mx-4"
+                v-model="password"
+                :error-messages="passwordErros"
+                @input="$v.password.$touch()"
+                @blur="$v.password.$touch()"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row justify="center" align="center" class="mt-n2">
+            <v-col>
+              <v-btn
+                color="#5465ff"
+                justify="center"
+                absolute
+                large
+                :loading="loading"
+                dark
+                @click="login"
+                class="rad"
+                :style="{
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '134',
+                }"
+              >
+                log in
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+
+
+
+
+
+
+
+
+
     <v-snackbar v-model="snackbar" :timeout="timeout" color="success" top>
       {{ msg }}
     </v-snackbar>

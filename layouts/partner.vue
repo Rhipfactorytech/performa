@@ -66,9 +66,9 @@ export default {
       fixed: true,
       selectedItem: null,
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/partners/dashboard/' },
-        { text: 'Profile', icon: 'mdi-account-group', to: '/partners/dashboard/profile'  },
-          { text: 'Growth plan', icon: 'mdi-account-group', to: '/partners/dashboard/growth'  },
+      //  { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/partners/dashboard/' },
+      //  { text: 'Profile', icon: 'mdi-account-group', to: '/partners/dashboard/profile'  },
+          { text: 'Growth plan', icon: 'mdi-google-analytics', to: '/partners/dashboard/growth'  },
       ],
       miniVariant: false,
       right: true,
