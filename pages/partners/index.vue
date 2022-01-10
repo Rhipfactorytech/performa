@@ -182,6 +182,7 @@ export default {
   methods: {
      ...mapMutations({
       getWorkId: 'getWorkId',
+      getName: 'getName'
     }),
     async login() {
       this.$v.$touch()
@@ -210,6 +211,7 @@ export default {
         }
       }
     },
+    
   },
   computed: {
     passwordErros() {
@@ -225,6 +227,7 @@ export default {
       return errors
     },
   },
+ 
 }
 </script>
 

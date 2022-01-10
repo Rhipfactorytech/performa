@@ -90,7 +90,7 @@
     <div>
       <v-row>
         <v-col>
-          <v-btn text class="text-capitalize mb-2 " @click="dialog=true">
+          <v-btn text class="text-capitalize mb-2" @click="dialog = true">
             <span class="titl-fnt pl-n2"> add a new growth plan </span>
           </v-btn>
         </v-col>
@@ -98,11 +98,19 @@
       <v-simple-table>
         <template v-slot:default>
           <thead>
-            <tr>
-              <th class="text-left">The Goal</th>
-              <th class="text-left">Timeline</th>
-              <th class="text-left">Knowledge Area</th>
-              <th class="text-left">learning plan</th>
+            <tr class="titl-fnt-mb-b3">
+              <th class="text-left">
+                <span class="titl-fnt-mb-b3">The Goal </span>
+              </th>
+              <th class="text-left">
+                <span class="titl-fnt-mb-b3">Timeline </span>
+              </th>
+              <th class="text-left">
+                <span class="titl-fnt-mb-b3"> Knowledge Area </span>
+              </th>
+              <th class="text-left">
+                <span class="titl-fnt-mb-b3"> learning plan </span>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -419,5 +427,11 @@ export default {
 .titl-fnt-mb-b2 {
   font-family: 'Urbanist', sans-serif;
   font-size: 15px;
+}
+
+.titl-fnt-mb-b3 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+  
 }
 </style>
