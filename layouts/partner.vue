@@ -46,6 +46,7 @@
       </template>
     </v-navigation-drawer>
     <v-app-bar fixed app color="#FFFFFF" flat>
+       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title
         ><span class="txtC font-weight-bold"
           >{{ pagename | formattitle }}</span
