@@ -91,7 +91,7 @@
       <v-row>
         <v-col>
           <v-btn text class="text-capitalize mb-2" @click="dialog = true">
-            <span class="titl-fnt pl-n2"> add a new growth plan </span>
+            <span class="titl-fnt mr-10"> add a new growth plan </span>
           </v-btn>
         </v-col>
       </v-row>
@@ -117,7 +117,11 @@
             <tr v-for="(item, index) in messages" :key="index">
               <td>{{ item.Goal }}</td>
               <td>{{ item.Timeline }}</td>
-              <td>{{ item.knowledgeArea }}</td>
+              <td>
+                <v-chip class="ma-2" color="green" text-color="white" small>
+                  {{ item.knowledgeArea }}
+                </v-chip>
+              </td>
               <td>{{ item.learningPath }}</td>
             </tr>
           </tbody>
@@ -432,6 +436,10 @@ export default {
 .titl-fnt-mb-b3 {
   font-family: 'Urbanist', sans-serif;
   font-size: 15px;
-  
+}
+.titl-fnt {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+  color: #585960;
 }
 </style>
