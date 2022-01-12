@@ -129,7 +129,7 @@
       </v-simple-table>
     </div>
     <v-dialog v-model="dialog" width="800px">
-      <v-card width="800px" height="550px">
+      <v-card width="800px" height="450px">
         <v-row justify="center" align="center" class="pt-2">
           <v-card-title>
             <span class="text-capitalize titl-fnt-mb-b">new growth plan</span>
@@ -162,19 +162,18 @@
           ></v-text-field>
         </v-row>
         <v-row class="mx-2 mt-4">
-          <v-radio-group v-model="selectKA" row class="ml-4">
-            <v-radio label="General" value="general"></v-radio>
-            <v-radio label="Product" value="product"></v-radio>
-            <v-radio label="Operations" value="operations"></v-radio>
-            <v-radio label="Business" value="business"></v-radio>
-          </v-radio-group>
-        </v-row>
-        <v-row class="mx-2 mt-4">
           <v-col>
-            <product-gp v-if="selectKA == 'product'" />
-            <operations-gp v-if="selectKA == 'operations'" />
-            <bussiness-gp v-if="selectKA == 'business'" />
-            <general-gp v-if="selectKA == 'general'" />
+            <v-text-field
+              label="Knowledge Area"
+              outlined
+              class="text-capitalize titl-fnt-mb"
+              color="#13274a"
+              v-model="knowledgeArea"
+              hint="E.g web design or digital marketing or how to use CRM"
+              :error-messages="kErrors"
+              @input="$v.knowledgeArea.$touch()"
+              @blur="$v.knowledgeArea.$touch()"
+            ></v-text-field>
           </v-col>
           <v-col>
             <v-menu
@@ -228,22 +227,18 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
-import productGp from '../../../components/product-gp.vue'
-import OperationsGp from '../../../components/operations-gp.vue'
-import GeneralGp from '../../../components/general-gp.vue'
 export default {
-  components: { productGp, OperationsGp, GeneralGp },
   layout: 'partner',
   mixins: [validationMixin],
   validations: {
     goal: { required },
     path: { required },
+    knowledgeArea: { required },
     //dateRangeText: { required },
   },
 
   data() {
     return {
-      selectKA: 'general',
       goal: '',
       path: '',
       knowledgeArea: '',
@@ -360,7 +355,7 @@ export default {
             {
               goal: this.goal,
               learningPath: this.path,
-              knowledgeArea: this.getKA,
+              knowledgeArea: this.knowledgeArea,
               timeline: this.dates,
             }
           )
@@ -413,9 +408,6 @@ export default {
       !this.$v.knowledgeArea.required && errors.push('required')
       return errors
     },
-    ...mapState({
-      getKA: (state) => state.knowledgeArea,
-    }),
   },
 }
 </script>

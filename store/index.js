@@ -3,6 +3,7 @@
 export const state = () => {
     workid:[]
     partner:''
+    knowledgeArea: ''
     
   }
   
@@ -13,6 +14,9 @@ export const state = () => {
     },
     getName(state, payload){
       state.partner = payload
+    },
+    getKA(state, payload){
+      state.knowledgeArea = payload
     }
 
   }
