@@ -220,6 +220,12 @@
         </v-row>
       </v-card>
     </v-dialog>
+       <v-snackbar v-model="snackbar" :timeout="timeout" color="success" top>
+      {{ msg }}
+    </v-snackbar>
+    <v-snackbar v-model="snackbarErr" :timeout="timeout" color="error" top>
+      {{ msg }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -243,6 +249,8 @@ export default {
 
   data() {
     return {
+       timeout: 7000,
+       msg:"",
       selectKA: 'general',
       goal: '',
       path: '',
@@ -365,8 +373,11 @@ export default {
             }
           )
           console.log(res)
+          this.msg = res.msg
           this.loading = false
+          this.dialog = false
           this.snackbar = true
+          location.reload()
         } catch (error) {
           console.log(error.response)
           this.loading = false
