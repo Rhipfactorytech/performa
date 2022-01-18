@@ -3,46 +3,47 @@
     <v-row justify="center" align="center" class="mt-10">
       <v-card height="550" width="600">
         <v-row justify="center" align="center" class="mt-12">
-          <p class="tit-fnt text-capitalize text-center ">
-            Hello, {{ name }}
-          </p>
+          <p class="tit-fnt text-capitalize text-center">Hello, {{ name }}</p>
         </v-row>
 
         <v-row justify="center" align="center" class="">
           <v-col>
             <div class="text-center tit-fnt-ft">
-              This is the beginning of amazing things for you at RHIP Factory<br /> and with your role coaches. Cheers to your growth!
+              This is the beginning of amazing things for you at RHIP Factory<br />
+              and with your role coaches. Cheers to your growth!
             </div>
           </v-col>
         </v-row>
 
         <v-row justify="center" align="center" class="mb-2 mt-6">
           <v-btn
-            class="text-capitalize"
-            outlined
-            to="/partners/dashboard/check-ins"
-            disabled
+            class="text-capitalize titl-fnt-ion"
+            to="/partners/dashboard/weekly"
+            text
           >
-            Do your weekly check-in</v-btn
-          >
-        </v-row>
-           <v-row justify="center" align="center" class="mb-2">
-          <v-btn
-            class="text-capitalize"
-            outlined
-            to="/partners/dashboard/growth"
-          >
-            set a growth plan</v-btn
+            <v-icon color="#5465ff" dark left>mdi-plus-box</v-icon> Do your
+            weekly check-in</v-btn
           >
         </v-row>
         <v-row justify="center" align="center" class="mb-2">
           <v-btn
-            class="text-capitalize"
-            outlined
+            class="text-capitalize titl-fnt-ion"
+            text
+            to="/partners/dashboard/growth"
+          >
+            <v-icon color="#5465ff" dark left class="mr-3">mdi-plus-box</v-icon>
+            <span style="margin-right: 47px">set a growth plan</span></v-btn
+          >
+        </v-row>
+        <v-row justify="center" align="center" class="mb-2">
+          <v-btn
+            class="text-capitalize titl-fnt-ion"
+            text
             to="/partners/dashboard/profile"
             disabled
           >
-            Profile</v-btn
+            <v-icon color="#5465ff"  dark left class="">mdi-plus-box</v-icon>
+            <span style="margin-right: 145px"> Profile </span></v-btn
           >
         </v-row>
       </v-card>
@@ -112,15 +113,20 @@ export default {
   color: #5465ff;
 }
 
-.tit-fnt{
-font-family: 'Urbanist', sans-serif;
+.tit-fnt {
+  font-family: 'Urbanist', sans-serif;
   font-size: 25px;
-  color: #ABACAF;
+  color: #abacaf;
 }
 
-.tit-fnt-ft{
-font-family: 'Urbanist', sans-serif;
+.tit-fnt-ft {
+  font-family: 'Urbanist', sans-serif;
   font-size: 16px;
-  color: #ABACAF;
+  color: #abacaf;
+}
+
+.titl-fnt-ion {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
 }
 </style>

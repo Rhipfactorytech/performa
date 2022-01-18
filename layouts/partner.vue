@@ -31,7 +31,7 @@
             <v-list-item-content>
               <v-list-item-title
                 v-text="item.text"
-                class=""
+                class="titl-fnt-mb"
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -39,7 +39,7 @@
       </v-list>
       <template v-slot:append>
         <div class="pa-4">
-          <v-btn text color="#828288" @click="logout">
+          <v-btn text color="#828288" class="titl-fnt-mb" @click="logout">
             <v-icon left> mdi-logout </v-icon> Log out
           </v-btn>
         </div>
@@ -48,7 +48,7 @@
     <v-app-bar fixed app color="#FFFFFF" flat>
        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title
-        ><span class="txtC font-weight-bold"
+        ><span class="txtC font-weight-bold titl-fnt-mb"
           >{{ pagename | formattitle }}</span
         ></v-toolbar-title
       >
@@ -87,6 +87,11 @@ export default {
           icon: 'mdi-google-analytics',
           to: '/partners/dashboard/growth',
         },
+          {
+          text: 'Weekly Updates',
+          icon: 'mdi-refresh',
+          to: '/partners/dashboard/weekly',
+        },
       ],
       miniVariant: false,
       right: true,
@@ -118,6 +123,13 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+.titl-fnt-mb {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+  
+}
+
 #bg {
   background: #e5e5e5;
 }
