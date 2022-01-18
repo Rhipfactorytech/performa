@@ -46,11 +46,11 @@
       </template>
     </v-navigation-drawer>
     <v-app-bar fixed app color="#FFFFFF" flat>
-       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title
-        ><span class="txtC font-weight-bold titl-fnt-mb"
-          >{{ pagename | formattitle }}</span
-        ></v-toolbar-title
+        ><span class="txtC font-weight-bold titl-fnt-mb">{{
+          pagename | formattitle
+        }}</span></v-toolbar-title
       >
 
       <v-spacer></v-spacer>
@@ -87,11 +87,11 @@ export default {
           icon: 'mdi-google-analytics',
           to: '/partners/dashboard/growth',
         },
-          {
-          text: 'Weekly Updates',
-          icon: 'mdi-refresh',
-          to: '/partners/dashboard/weekly',
-        },
+       // {
+        //  text: 'Weekly Updates',
+        //  icon: 'mdi-refresh',
+        //  to: '/partners/dashboard/weekly',
+       // },
       ],
       miniVariant: false,
       right: true,
@@ -127,7 +127,6 @@ export default {
 .titl-fnt-mb {
   font-family: 'Urbanist', sans-serif;
   font-size: 15px;
-  
 }
 
 #bg {

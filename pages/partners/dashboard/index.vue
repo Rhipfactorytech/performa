@@ -20,6 +20,7 @@
             class="text-capitalize titl-fnt-ion"
             to="/partners/dashboard/weekly"
             text
+            disabled
           >
             <v-icon color="#5465ff" dark left>mdi-plus-box</v-icon> Do your
             weekly check-in</v-btn
