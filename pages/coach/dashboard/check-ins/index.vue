@@ -3,24 +3,41 @@
     <v-simple-table class="mt-4">
       <template v-slot:default>
         <thead>
-          <tr>
-            <th class="text-left">Partner Name</th>
-            <th class="text-left">Stream</th>
-            <th class="text-left">Designation</th>
-            <th class="text-left">Status</th>
-            <th class="text-left">View profile</th>
+          <tr class="titl-fnt-mb-b3">
+            <th class="text-left">
+              <span class="titl-fnt-mb-b3">Partner Name</span>
+            </th>
+            <th class="text-left">
+              <span class="titl-fnt-mb-b3">Stream</span>
+            </th>
+            <th class="text-left">
+              <span class="titl-fnt-mb-b3">SubStream </span>
+            </th>
+            <th class="text-left">
+              <span class="titl-fnt-mb-b3">View profile </span>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in body" :key="item.workid" class="mt-2">
-            <td>{{ item.name }}</td>
-            <td>{{ item.tribe }}</td>
-            <td>{{ item.designation }}</td>
-            <td>{{ item.action | formatdate }}</td>
             <td>
-              <nuxt-link :to="'/coach/dashboard/check-ins/' + item.workId">
-                view profile
-              </nuxt-link>
+              <span class="titl-fnt-mb-b2">{{ item.name }} </span>
+            </td>
+            <td>
+              <span class="titl-fnt-mb-b2">{{ item.tribe }}</span>
+            </td>
+            <td>
+              <span class="titl-fnt-mb-b2">{{ item.designation }}</span>
+            </td>
+          <!--  <td>
+              <span class="titl-fnt-mb-b2">{{ item.action | formatdate }}</span>
+            </td> -->
+            <td>
+              <span class="titl-fnt-mb-b2">
+                <nuxt-link :to="'/coach/dashboard/check-ins/' + item.workId">
+                  view profile
+                </nuxt-link>
+              </span>
             </td>
           </tr>
         </tbody>
@@ -64,9 +81,7 @@ export default {
         { text: 'Status', value: 'status' },
         { text: 'view profile' },
       ],
-      body: [
-       
-      ],
+      body: [],
       loading: false,
       msg: '',
       timeout: 7000,
@@ -126,10 +141,12 @@ export default {
     async getPartners() {
       try {
         const res = await this.$axios.$get(
-          `${this.$config.baseUrl}partner/coach/get/partner`
+          `${this.$config.baseUrl}partner/coach/get/partners`
         )
         console.log(res.data)
-        this.body = res.data
+        var arr = []
+        this.body = res.data.asCoach1.concat(res.data.asCoach2)
+        console.log(this.body)
       } catch (error) {
         console.log(error.response)
       }
@@ -178,3 +195,39 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+.titl-fnt-mb {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+  color: #5465ff;
+}
+
+.titl-fnt-mb-b {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #5465ff;
+}
+
+.titl-fnt-mb-b2 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 13px;
+}
+
+.titl-fnt-mb-b3 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+}
+.titl-fnt {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+  color: #585960;
+}
+
+a {
+  text-decoration: none;
+}
+</style>

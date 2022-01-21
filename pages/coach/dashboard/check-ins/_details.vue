@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tabs v-model="tab" background-color="#5465ff" grow dark icons-and-text>
+    <!--  <v-tabs v-model="tab" background-color="#5465ff" grow dark icons-and-text>
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab href="#tab-1" class="text-capitalize"> Weekly report </v-tab>
@@ -21,7 +21,7 @@
         <productdev v-if="stream == 'Product stream'" />
         <Business v-if="stream == 'Business stream'" />
         <cxm v-if="stream == 'CXM stream'" />
-        <!-- end of edit profile -->
+         end of edit profile 
       </v-tab-item>
       <v-tab-item value="tab-1">
         <v-row class="mt-4 mx-auto mb-6">
@@ -175,7 +175,121 @@
           </v-col>
         </v-row>
       </v-tab-item>
-    </v-tabs-items>
+    </v-tabs-items> -->
+
+    <v-card outlined height="700">
+      <v-row class="pt-6 ml-4 titl-fnt-mb-b3">
+        <v-col cols="6"
+          ><span class="text-capitalize">{{ name }}</span
+          >'s weekly update
+        </v-col>
+        <v-col cols="5">
+          <v-row>
+            <v-select
+              :items="months"
+              label="Month"
+              outlined
+              style="width: 20px"
+              class="mr-2"
+              dense
+              v-model="selectMonth"
+              prepend-inner-icon="mdi-calendar"
+            ></v-select>
+
+            <v-select
+              v-model="selectWeek"
+              :items="week"
+              label="Week"
+              outlined
+              style="width: 40px"
+              dense
+              prepend-inner-icon="mdi-calendar"
+              @change="getweekUPdate"
+            ></v-select>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row class="mt-8">
+        <v-col cols="4">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title
+                ><span class="titl-fnt-mb-b3"
+                  >Work Stream:
+                </span></v-list-item-title
+              >
+              <v-list-item-subtitle
+                ><span class="titl-fnt-mb-b2"
+                  >{{ stream }}
+                </span></v-list-item-subtitle
+              >
+              <v-list-item-title
+                ><span class="titl-fnt-mb-b3"
+                  >Designation:
+                </span></v-list-item-title
+              >
+              <v-list-item-subtitle
+                ><span class="titl-fnt-mb-b2">{{
+                  designation
+                }}</span></v-list-item-subtitle
+              >
+              <v-list-item-title
+                ><span class="titl-fnt-mb-b3"
+                  >Weekly Update date:
+                </span></v-list-item-title
+              >
+              <v-list-item-subtitle
+                ><span class="titl-fnt-mb-b2"
+                  >{{ weekupdateDate }}
+                </span></v-list-item-subtitle
+              >
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+        <v-col cols="8">
+          <v-textarea
+            outlined
+            name="input-7-7"
+            label="Update"
+            class="titl-fnt-mb-b3 mr-4 mt-4"
+            v-model="weekUP"
+            readonly
+          ></v-textarea
+        ></v-col>
+      </v-row>
+
+      <v-row class="ml-4 mt-6 titl-fnt"> Your Feedback </v-row>
+      <v-row class="ml-4 mr-4">
+        <v-textarea
+          outlined
+          name="input-7-7"
+          label="Update"
+          class="titl-fnt-mb-b3 mt-4"
+          v-model="weekFeedback"
+        ></v-textarea>
+      </v-row>
+
+      <v-row class="class ml-4">
+        <v-btn
+          class="text-capitalize"
+          color="#5465ff"
+          @click="sendFeedback"
+          x-large
+          dark
+          style="border-radius: 8px"
+          :disabled="disable"
+          :loading="loading"
+          >save feedback</v-btn
+        >
+      </v-row>
+    </v-card>
+
+    <v-snackbar v-model="snackbar" :timeout="timeout" color="success" top>
+      {{ msg }}
+    </v-snackbar>
+    <v-snackbar v-model="snackbarErr" :timeout="timeout" color="error" top>
+      {{ msg }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -197,25 +311,27 @@ export default {
 
   data() {
     return {
+      disable: false,
+      selectMonth: 'January',
+      selectWeek: 'week1',
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ],
+      week: ['week1', 'week2', 'week3', 'week4', 'week5'],
       editmode: true,
       id: this.$route.params.details,
-      headers: [
-        {
-          text: 'Partner name',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Stream', value: 'tribe' },
-        { text: 'Designation', value: 'designation' },
-        { text: 'Status', value: 'status' },
-        { text: 'view profile' },
-      ],
-      body: [
-        {
-          name: 'olumide',
-        },
-      ],
+
       loading: false,
       msg: '',
       timeout: 7000,
@@ -243,57 +359,63 @@ export default {
         .toISOString()
         .substr(0, 10),
       menu2: false,
-      weekreport: [],
+      weekreport: '',
       appraisal: [],
       monthly: [],
-      growth:[]
+      growth: [],
+      weekupdateDate: '',
+      weekFeedback: '',
+      feedbackId: '',
+      weekUP: '',
+      coachname: '',
+      role: '',
+      getCoach1: '',
+      getCoach2: '',
     }
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     ...mapMutations({
       getWorkId: 'getWorkId',
     }),
+    test() {
+      if (this.coachname == this.getCoach1) {
+        console.log('na role coach 1 be this')
+      } else if (this.coachname == this.getCoach2) {
+        console.log('na role coach 2 be this')
+      }
+    },
+
     getColor(status) {
       if (status >= 80 && status <= 100) return 'success'
       else if (status >= 50 && status <= 80) return 'warning'
       else return 'error'
     },
-    async getWeekly() {
+    async getweekUPdate() {
       try {
         const res = await this.$axios.$get(
-          `${this.$config.baseUrl}partner/weeklyreport/check/${this.id}`
+          `${this.$config.baseUrl}partner/weeklyreport/coach/check/${this.id}/${this.selectMonth}/${this.selectWeek}`
         )
-        console.log(res.data)
-        this.weekreport = res.data
+        console.log(res)
+        this.weekupdateDate = res.data.date
+        this.selectMonth = res.data.month
+        this.weekFeedback = res.data.review
+        this.feedbackId = res.data.reviewId
+        this.weekUP = res.data.update
+        this.selectWeek = res.data.week
+        this.disable = false
       } catch (error) {
-        console.log(error.response)
+        this.msg = error.response.data.detail
+        console.log(error.response.data.detail)
+        this.disable = true
+        this.weekupdateDate = null
+        this.weekFeedback = null
+        this.feedbackId = null
+        this.weekUP = null
+        this.snackbarErr = true
       }
     },
-      async getGrowth() {
-      try {
-        const res = await this.$axios.$get(
-          `${this.$config.baseUrl}partner/growthplan/coach/get/${this.id}`
-        )
-        console.log(res.data)
-        this.growth = res.data.growthplans
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
-    async getMonth() {
-      try {
-        const res = await this.$axios.$get(
-          `${this.$config.baseUrl}admin/godmode/evaluation/get/${this.id}`
-        )
-        console.log(res.data)
-        this.monthly = res.data
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
+
     async getPartners() {
       try {
         const res = await axios.get(
@@ -306,37 +428,51 @@ export default {
         this.getWorkId(res.data.data.workid)
         this.resumption = res.data.data.dateofresumption
         this.stream = res.data.data.tribe
+        this.designation = res.data.data.designation
+        this.getCoach1 = res.data.data.rolecoach1
+        this.getCoach2 = res.data.data.rolecoach2
       } catch (error) {
         console.log(error.response)
       }
     },
-    async add_partner() {
+    async sendFeedback() {
       this.loading = true
-      try {
-        const res = await axios.post(
-          `${this.$config.baseUrl}admin/godmode/emp/create`,
-          {
-            name: this.name,
-            workid: this.workid,
-            workemail: this.email,
-            designation: this.designation,
-            tribe: this.stream,
-            phonenumber: this.phone,
-            dateOfresumption: this.resumption,
-            currentSkill: this.currentSkill,
-            nextSkill: this.nextskill,
-            roleCoach: this.rolecoach,
-          }
-        )
-        console.log(res)
-        this.loading = false
-        this.msg = res.data.msg
-        this.snackbar = true
-      } catch (error) {
-        console.log(error.response)
-        this.loading = false
-        this.msg = error.response.data.detail
-        this.snackbarErr = true
+      if (this.coachname == this.getCoach1) {
+        try {
+          const res = await axios.post(
+            `${this.$config.baseUrl}partner/weeklyreport/coach/review/${this.feedbackId}`,
+            {
+              feedbackCoach1: this.weekFeedback,
+            }
+          )
+          console.log(res)
+          this.loading = false
+          this.msg = res.data.msg
+          this.snackbar = true
+        } catch (error) {
+          console.log(error.response.data.detail)
+          this.loading = false
+          this.msg = error.response.data.detail
+          this.snackbarErr = true
+        }
+      } else if (this.coachname == this.getCoach2) {
+        try {
+          const res = await axios.post(
+            `${this.$config.baseUrl}partner/weeklyreport/coach/review/${this.feedbackId}`,
+            {
+              feedbackCoach2: this.weekFeedback,
+            }
+          )
+          console.log(res)
+          this.loading = false
+          this.msg = res.data.msg
+          this.snackbar = true
+        } catch (error) {
+          console.log(error.response.data.detail)
+          this.loading = false
+          this.msg = error.response.data.detail
+          this.snackbarErr = true
+        }
       }
     },
 
@@ -353,16 +489,27 @@ export default {
         console.log(error.response)
       }
     },
-
+    async getCoach() {
+      try {
+        const res = await this.$axios.$get(
+          `${this.$config.baseUrl}partner/coach/viewprofile`
+        )
+        console.log(res)
+        // this.body = res.data.data
+        this.coachname = res.data.name
+      } catch (error) {
+        console.log(error.response)
+      }
+    },
     async switchTab() {
       this.getAppraisal()
     },
   },
   created() {
     this.getPartners()
-    this.getWeekly()
+    this.getCoach()
     // this.getAppraisal()
-    this.getMonth()
+    this.getweekUPdate()
   },
   filters: {
     formatdate(value) {
@@ -375,3 +522,38 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+.titl-fnt-mb {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+  color: #5465ff;
+}
+
+.titl-fnt-mb-b {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.titl-fnt-mb-b2 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 13px;
+}
+
+.titl-fnt-mb-b3 {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+}
+.titl-fnt {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 20px;
+  color: #585960;
+}
+
+a {
+  text-decoration: none;
+}
+</style>

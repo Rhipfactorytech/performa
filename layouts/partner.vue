@@ -87,11 +87,11 @@ export default {
           icon: 'mdi-google-analytics',
           to: '/partners/dashboard/growth',
         },
-       // {
-        //  text: 'Weekly Updates',
-        //  icon: 'mdi-refresh',
-        //  to: '/partners/dashboard/weekly',
-       // },
+        {
+          text: 'Weekly Updates',
+          icon: 'mdi-refresh',
+          to: '/partners/dashboard/weekly',
+        },
       ],
       miniVariant: false,
       right: true,

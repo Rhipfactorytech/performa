@@ -29,9 +29,38 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in messages" :key="index">
-              <td>{{ item.date }}</td>
+              <td>
+                <span class="titl-fnt-mb-b2">{{ item.date }}</span>
+              </td>
               <td>{{ item.update }}</td>
-              <td>no updates</td>
+              <td>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-subtitle
+                      ><span class="titl-fnt-mb-b2"
+                        >Role Coach 1:</span
+                      ></v-list-item-subtitle
+                    >
+                    <v-list-item-subtitle
+                      ><span class="titl-fnt-mb-b2"
+                        >{{ item.coach1 }}
+                      </span></v-list-item-subtitle
+                    >
+
+                    <v-list-item-subtitle
+                      ><span class="titl-fnt-mb-b2"
+                        >Role Coach 2:</span
+                      ></v-list-item-subtitle
+                    >
+                    <v-list-item-subtitle
+                      ><span class="titl-fnt-mb-b2"
+                        >{{ item.coach2 }}
+                      </span></v-list-item-subtitle
+                    >
+                  </v-list-item-content>
+                  <v-list-item-content> </v-list-item-content>
+                </v-list-item>
+              </td>
               <td>
                 <nuxt-link :to="'/partners/dashboard/weekly/' + item.reviewId">
                   view more
@@ -109,6 +138,7 @@
         </v-row>
       </v-card>
     </v-dialog>
+
     <v-snackbar v-model="snackbar" :timeout="timeout" color="success" top>
       {{ msg }}
     </v-snackbar>
@@ -207,6 +237,23 @@ export default {
     },
   },
   methods: {
+    getweek() {
+      var getweeknum = this.$moment(this.date, 'YYYYMMDD').week()
+      if (getweeknum == 1) {
+        var weeknum = 'week1'
+      } else if (getweeknum == 2) {
+        var weeknum = 'week2'
+      } else if (getweeknum == 3) {
+        var weeknum = 'week3'
+      } else if (getweeknum == 4) {
+        var weeknum = 'week4'
+      } else if (getweeknum == 5) {
+        var weeknum = 'week5'
+      } else {
+        alert('invalid date')
+      }
+      return weeknum
+    },
     async getmessages() {
       try {
         const res = await this.$axios.$get(
@@ -262,7 +309,7 @@ export default {
 
       const d = new Date()
       let name = month[d.getMonth()]
-
+      let weeknumber = this.getweek()
       this.$v.$touch()
       if (!this.$v.$invalid) {
         this.loading = true
@@ -273,6 +320,7 @@ export default {
               month: name,
               date: this.date,
               update: this.weekUP,
+              week: weeknumber,
             }
           )
           console.log(res)
@@ -341,10 +389,12 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+
 a {
   text-decoration: none;
 }
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+
 .titl-fnt-mb {
   font-family: 'Urbanist', sans-serif;
   font-size: 20px;
@@ -361,7 +411,7 @@ a {
 
 .titl-fnt-mb-b2 {
   font-family: 'Urbanist', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .titl-fnt-mb-b3 {

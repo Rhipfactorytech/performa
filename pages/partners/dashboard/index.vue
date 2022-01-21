@@ -20,7 +20,6 @@
             class="text-capitalize titl-fnt-ion"
             to="/partners/dashboard/weekly"
             text
-            disabled
           >
             <v-icon color="#5465ff" dark left>mdi-plus-box</v-icon> Do your
             weekly check-in</v-btn
@@ -43,7 +42,7 @@
             to="/partners/dashboard/profile"
             disabled
           >
-            <v-icon color="#5465ff"  dark left class="">mdi-plus-box</v-icon>
+            <v-icon color="#5465ff" dark left class="">mdi-plus-box</v-icon>
             <span style="margin-right: 145px"> Profile </span></v-btn
           >
         </v-row>
@@ -102,6 +101,7 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+
 #txt1 {
   color: #abacaf;
 }
