@@ -14,7 +14,7 @@
               <span class="titl-fnt-mb-b3">SubStream </span>
             </th>
             <th class="text-left">
-              <span class="titl-fnt-mb-b3">View profile </span>
+              <span class="titl-fnt-mb-b3">View monthly check-ins </span>
             </th>
           </tr>
         </thead>
@@ -34,7 +34,7 @@
             </td> -->
             <td>
               <span class="titl-fnt-mb-b2">
-                <nuxt-link :to="'/coach/dashboard/check-ins/' + item.workId">
+                <nuxt-link :to="'/coach/dashboard/monthly/' + item.workId">
                   view profile
                 </nuxt-link>
               </span>

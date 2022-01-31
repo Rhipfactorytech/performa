@@ -85,6 +85,11 @@ export default {
           icon: 'mdi-refresh',
           to: '/coach/dashboard/check-ins',
         },
+        {
+            text: 'Monthly check-in',
+          icon: "mdi-checkbox-marked-outline",
+          to: '/coach/dashboard/monthly'
+        }
          //{ text: 'Messages', icon: 'mdi-mail', to: '/coach/dashboard/message' },
         // {
         //  text: 'Profile',

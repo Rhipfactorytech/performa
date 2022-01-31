@@ -92,6 +92,11 @@ export default {
           icon: 'mdi-refresh',
           to: '/partners/dashboard/weekly',
         },
+        {
+            text: 'Monthly check-in',
+          icon: "mdi-checkbox-marked-outline",
+          to: '/partners/dashboard/monthly'
+        }
       ],
       miniVariant: false,
       right: true,
