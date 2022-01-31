@@ -4,8 +4,22 @@
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab href="#tab-1" class="text-capitalize"> Coach Profile </v-tab>
-      <v-tab href="#tab-2" class="text-capitalize" @click="getWeekly"> Weekly report </v-tab>
-      <v-tab @click="switchTab" href="#tab-3" class="text-capitalize"> Quaterly Appraisal </v-tab>
+      <v-tab
+        href="#tab-2"
+        class="text-capitalize"
+        @click="getWeekly"
+        v-if="!editmode"
+      >
+        Weekly report
+      </v-tab>
+      <v-tab
+        @click="switchTab"
+        href="#tab-3"
+        class="text-capitalize"
+        v-if="!editmode"
+      >
+        Quaterly Appraisal
+      </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-1">
@@ -187,15 +201,12 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6">
-            <v-text-field
-              label="Role Coach"
-              outlined
-              class="text-capitalize"
-              color="#13274a"
-              v-model="rolecoach"
-            ></v-text-field>
+            <v-select :items="items" label="Role Coach 1" outlined></v-select>
           </v-col>
-           <v-col cols="6">
+          <v-col cols="6">
+            <v-select :items="items" label="Role Coach 2" outlined></v-select>
+          </v-col>
+          <v-col cols="6">
             <v-text-field
               label="Password"
               outlined
@@ -224,41 +235,50 @@
 
         <!-- end of edit profile -->
       </v-tab-item>
-      <v-tab-item value="tab-2">
+      <v-tab-item value="tab-2" v-if="!editmode">
         <v-row class="mt-4 mx-auto mb-6">
           <v-col cols="4">
             <v-card width="400">
-           <!--   <v-list-item>
+              <!--   <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title class="text-h5 mb-1">
                     December
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item> -->
-              <v-list-item  >
-                <v-list-item-content v-for="(item, index) in weekreport"
-                  :key="index">
-                  <v-list-item-title class="mb-1">  {{ index }}  </v-list-item-title>
-                  <v-list-item-subtitle>week1: {{item[0]}} </v-list-item-subtitle>
-                    <v-list-item-subtitle>week2: {{item[1]}} </v-list-item-subtitle>
-                      <v-list-item-subtitle>week3: {{item[2]}} </v-list-item-subtitle>
-                        <v-list-item-subtitle>week4: {{item[3]}} </v-list-item-subtitle>
+              <v-list-item>
+                <v-list-item-content
+                  v-for="(item, index) in weekreport"
+                  :key="index"
+                >
+                  <v-list-item-title class="mb-1">
+                    {{ index }}
+                  </v-list-item-title>
+                  <v-list-item-subtitle
+                    >week1: {{ item[0] }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >week2: {{ item[1] }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >week3: {{ item[2] }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >week4: {{ item[3] }}
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-card>
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item value="tab-3">
+      <v-tab-item value="tab-3" v-if="!editmode">
         <v-row class="mt-4 mx-auto mb-6">
-          <v-col cols="4" v-for="(item, index) in appraisal"
-                  :key="index">
-            <v-card width="300" >
+          <v-col cols="4" v-for="(item, index) in appraisal" :key="index">
+            <v-card width="300">
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="text-h5 mb-1">
-                   
-                  </v-list-item-title>
+                  <v-list-item-title class="text-h5 mb-1"> </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-row class="ml-4 pb-4">
@@ -268,7 +288,7 @@
                   :value="item.finalScore"
                   :color="getColor(item.finalScore)"
                 >
-                  {{item.finalScore}}
+                  {{ item.finalScore }}
                 </v-progress-circular>
               </v-row>
             </v-card>
@@ -342,16 +362,14 @@ export default {
         .toISOString()
         .substr(0, 10),
       menu2: false,
-      weekreport:[],
-      appraisal:[],
-      password:""
+      weekreport: [],
+      appraisal: [],
+      password: '',
     }
   },
-  computed: {
-  
-  },
+  computed: {},
   methods: {
-      async getWeekly() {
+    async getWeekly() {
       try {
         const res = await this.$axios.$get(
           `${this.$config.baseUrl}partner/weeklyreport/check/${this.id}`
@@ -363,12 +381,12 @@ export default {
       }
     },
     getColor(status) {
-      if (status >= 80 && status <= 100) return "success"
+      if (status >= 80 && status <= 100) return 'success'
       else if (status >= 50 && status <= 80) return 'warning'
       else return 'error'
     },
-    async switchTab(){
-       this.getAppraisal()
+    async switchTab() {
+      this.getAppraisal()
     },
     async getPartners() {
       try {
@@ -422,15 +440,15 @@ export default {
         this.snackbarErr = true
       }
     },
-    
-     async getAppraisal() {
+
+    async getAppraisal() {
       try {
         const res = await this.$axios.$get(
-         `${this.$config.baseUrl}admin/godmode/appraisal/${this.tribe}/${this.workid}`
-           //`${this.$config.baseUrl}admin/godmode/appraisal/Business stream/string`
+          `${this.$config.baseUrl}admin/godmode/appraisal/${this.tribe}/${this.workid}`
+          //`${this.$config.baseUrl}admin/godmode/appraisal/Business stream/string`
         )
-       // console.log(res.data)
-       this.appraisal = res.data
+        // console.log(res.data)
+        this.appraisal = res.data
       } catch (error) {
         console.log(error.response)
       }
@@ -439,7 +457,6 @@ export default {
   created() {
     this.getPartners()
     this.getWeekly()
-   
   },
   filters: {
     formatdate(value) {

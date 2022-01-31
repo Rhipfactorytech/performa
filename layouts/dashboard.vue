@@ -66,7 +66,7 @@ export default {
       fixed: true,
       selectedItem: 1,
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin' },
+        { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin/dashboard' },
         { text: 'Streams', icon: 'mdi-account-group', to: '/admin/dashboard/stream'},
         
       ],

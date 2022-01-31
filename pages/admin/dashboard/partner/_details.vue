@@ -4,200 +4,114 @@
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab href="#tab-1" class="text-capitalize">partner Profile </v-tab>
-
-      <v-tab href="#tab-2" class="text-capitalize" @click="getWeekly"> Weekly report </v-tab>
-      <v-tab  @click="switchTab" href="#tab-3" class="text-capitalize"> Quaterly Appraisal </v-tab>
-        <v-tab  @click="takeAction" href="#tab-4" class="text-capitalize"> Action </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="tab-1">
-        <v-row class="mt-4 mx-auto" v-if="!editmode">
-          <v-card width="100%">
-            <v-list-item three-line>
-              <v-list-item-avatar
-                tile
-                size="80"
-                color="grey"
-              ></v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="text-h5 mb-1">
-                  {{ name }}'s profile
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-row class="mt-6 mx-auto">
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Wordk ID
-                    </v-list-item-title>
-                    <v-list-item-subtitle> {{ workid }} </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Engagement date
-                    </v-list-item-title>
-                    <v-list-item-subtitle>
-                      {{ resumption }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Work Stream
-                    </v-list-item-title>
-                    <v-list-item-subtitle> {{ stream }} </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Sub-stream
-                    </v-list-item-title>
-                    <v-list-item-subtitle> afgsz </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Skill level
-                    </v-list-item-title>
-                    <v-list-item-subtitle> afgsz </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                      Next Skill level
-                    </v-list-item-title>
-                    <v-list-item-subtitle> afgsz </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-
-              <v-col cols="4">
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title class="text-h6 mb-1">
-                    </v-list-item-title>
-                    <v-list-item-subtitle> afgsz </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-row>
-   <!-- edit profile -->
+        <!-- edit profile -->
         <v-row class="mt-4 mx-auto" v-if="editmode">
-            <v-col cols="6">
-              <v-text-field
-                label="Partner name"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="name"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="work Id"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="workid"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Work Email"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="email"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Phone number"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="phone"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Date of resumption"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="resumption"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Work stream"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="stream"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Designation"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="designation"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Current Skill"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="currentSkill"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Next Skill"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="nextskill"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
-              <v-text-field
-                label="Role Coach"
-                outlined
-                class="text-capitalize"
-                color="#13274a"
-                v-model="rolecoach"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="6">
+          <v-col cols="6">
+            <v-text-field
+              label="Partner name"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="name"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="work Id"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="workid"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Work Email"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="email"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Phone number"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="phone"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Date of resumption"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="resumption"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Work stream"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="stream"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Designation"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="designation"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Current Skill"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="currentSkill"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6">
+            <v-text-field
+              label="Next Skill"
+              outlined
+              class="text-capitalize"
+              color="#13274a"
+              v-model="nextskill"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="6">
+            <v-select
+              :items="listofCoach"
+              item-text="name"
+              item-value="name"
+              v-model="roleCoach1"
+              label="Role Coach 1"
+              outlined
+            ></v-select>
+          </v-col>
+          <v-col cols="6">
+            <v-select
+              :items="listofCoach"
+              item-text="name"
+              item-value="name"
+              v-model="roleCoach2"
+              label="Role Coach 2"
+              outlined
+            ></v-select>
+          </v-col>
+          <v-col cols="6">
             <v-text-field
               label="Password"
               outlined
@@ -207,83 +121,32 @@
               readonly
             ></v-text-field>
           </v-col>
-          </v-row>
-          <v-row class="mt-4 mb-4 mx-6" v-if="editmode">
-            <v-col cols="12">
-              <v-btn
-                color="#5465ff"
-                large
-                :loading="loading"
-                dark
-                @click="add_partner"
-                class="mx-auto"
-                block
-              >
-                update profile
-              </v-btn>
-            </v-col>
-          </v-row>
-
-          <!-- end of edit profile -->
-
-
-
-
-      </v-tab-item>
-      <v-tab-item value="tab-2">
-        <v-row class="mt-4 mx-auto mb-6">
-          <v-col cols="4">
-            <v-card width="700">
-               <v-list-item  >
-                <v-list-item-content v-for="(item, index) in weekreport"
-                  :key="index">
-                  <v-list-item-title class="mb-1">  {{ index }}  </v-list-item-title>
-                  <v-list-item-subtitle>week1: {{item[0]}} </v-list-item-subtitle>
-                    <v-list-item-subtitle>week2: {{item[1]}} </v-list-item-subtitle>
-                      <v-list-item-subtitle>week3: {{item[2]}} </v-list-item-subtitle>
-                        <v-list-item-subtitle>week4: {{item[3]}} </v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
+        </v-row>
+        <v-row class="mt-4 mb-4 mx-6" v-if="editmode">
+          <v-col cols="12">
+            <v-btn
+              color="#5465ff"
+              large
+              :loading="loading"
+              dark
+              @click="add_partner"
+              class="mx-auto"
+              block
+            >
+              add role coach
+            </v-btn>
           </v-col>
         </v-row>
-      </v-tab-item>
-      <v-tab-item value="tab-3">
-        <v-row class="mt-4 mx-auto mb-6">
-          <v-col cols="4" v-for="(item, index) in appraisal"
-                  :key="index">
-            <v-card width="300" >
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title class="text-h5 mb-1">
-                   Quarter {{index + 1}}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-row class="ml-4 pb-4">
-                <v-progress-circular
-                  :size="100"
-                  :width="15"
-                  :value="item.finalScore"
-                  :color="getColor(item.finalScore)"
-                >
-                  {{item.finalScore}}
-                </v-progress-circular>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-tab-item>
-      <v-tab-item value="tab-4">
-        <v-row class="mt-4 mx-auto mb-6" justify="center" align="center">
-          <v-card width="300" height="80">
-            <v-row justify="center" align="center" class="mt-8 font-weight-bold text-capitalize">
-            {{action}} 
-            </v-row>
-          </v-card>
-        </v-row>
+
+        <!-- end of edit profile -->
       </v-tab-item>
     </v-tabs-items>
+    <v-snackbar v-model="snackbar" :timeout="timeout" color="success" top>
+      {{ msg }}
+    </v-snackbar>
+    <v-snackbar v-model="snackbarErr" :timeout="timeout" color="error" top>
+      {{ msg }}
+    </v-snackbar>
   </div>
 </template>
 
@@ -303,7 +166,13 @@ export default {
   },
   data() {
     return {
-      password:"",
+      snackbar: false,
+      snackbarErr: false,
+      timeout: 7000,
+      msg: '',
+      roleCoach1: '',
+      roleCoach2: '',
+      password: '',
       editmode: true,
       id: this.$route.params.details,
       headers: [
@@ -350,22 +219,32 @@ export default {
         .toISOString()
         .substr(0, 10),
       menu2: false,
-      weekreport:[],
-      appraisal:[],
-      action: ""
+      weekreport: [],
+      appraisal: [],
+      action: '',
+      listofCoach: '',
     }
   },
-  computed: {
-  
-  },
+  computed: {},
   methods: {
+    async getCoach() {
+      try {
+        const res = await this.$axios.$get(
+          `${this.$config.baseUrl}admin/godmode/coach/all`
+        )
+        console.log(res.data)
+        this.listofCoach = res.data
+      } catch (error) {
+        console.log(error.response)
+      }
+    },
     getColor(status) {
-      if (status >= 80 && status <= 100) return "success"
+      if (status >= 80 && status <= 100) return 'success'
       else if (status >= 50 && status <= 80) return 'warning'
       else return 'error'
     },
-    async switchTab(){
-       this.getAppraisal()
+    async switchTab() {
+      this.getAppraisal()
     },
     async getPartners() {
       try {
@@ -386,6 +265,8 @@ export default {
         this.currentSkill = res.data.data.currentskill
         this.nextskill = res.data.data.nextSkill
         this.password = res.data.data.password
+        this.roleCoach1 = res.data.data.rolecoach1
+        this.roleCoach2 = res.data.data.rolecoach2
       } catch (error) {
         console.log(error.response)
       }
@@ -394,18 +275,10 @@ export default {
       this.loading = true
       try {
         const res = await axios.post(
-          `${this.$config.baseUrl}admin/godmode/emp/create`,
+          `${this.$config.baseUrl}admin/godmode/emp/edit/${this.id}`,
           {
-            name: this.name,
-            workid: this.workid,
-            workemail: this.email,
-            designation: this.designation,
-            tribe: this.stream,
-            phonenumber: this.phone,
-            dateOfresumption: this.resumption,
-            currentSkill: this.currentSkill,
-            nextSkill: this.nextskill,
-            roleCoach: this.rolecoach,
+            roleCoach1: this.roleCoach1,
+            roleCoach2: this.roleCoach2,
           }
         )
         console.log(res)
@@ -419,7 +292,7 @@ export default {
         this.snackbarErr = true
       }
     },
-      async getWeekly() {
+    async getWeekly() {
       try {
         const res = await this.$axios.$get(
           `${this.$config.baseUrl}partner/weeklyreport/check/${this.id}`
@@ -430,7 +303,7 @@ export default {
         console.log(error.response)
       }
     },
-      async takeAction() {
+    async takeAction() {
       try {
         const res = await this.$axios.$post(
           `${this.$config.baseUrl}admin/godmode/action/${this.id}`
@@ -441,23 +314,24 @@ export default {
         console.log(error.response)
       }
     },
-     async getAppraisal() {
+    async getAppraisal() {
       try {
         const res = await this.$axios.$get(
-         `${this.$config.baseUrl}admin/godmode/appraisal/${this.tribe}/${this.workid}`
-           //`${this.$config.baseUrl}admin/godmode/appraisal/Business stream/string`
+          `${this.$config.baseUrl}admin/godmode/appraisal/${this.tribe}/${this.workid}`
+          //`${this.$config.baseUrl}admin/godmode/appraisal/Business stream/string`
         )
-       // console.log(res.data)
-       this.appraisal = res.data
+        // console.log(res.data)
+        this.appraisal = res.data
       } catch (error) {
         console.log(error.response)
       }
     },
   },
   created() {
-   // this.getPartners()
+    // this.getPartners()
     this.getPartners()
     this.getWeekly()
+    this.getCoach()
   },
   filters: {
     formatdate(value) {
