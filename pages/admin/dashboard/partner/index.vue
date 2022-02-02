@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-breadcrumbs :items="items"></v-breadcrumbs>
     <v-tabs v-model="tab" background-color="#5465ff" grow dark icons-and-text>
       <v-tabs-slider></v-tabs-slider>
 
@@ -195,9 +196,7 @@ export default {
         { text: 'Status', value: 'status' },
         { text: 'view profile' },
       ],
-      body: [
-        
-      ],
+      body: [],
       loading: false,
       msg: '',
       timeout: 7000,
@@ -228,6 +227,23 @@ export default {
       selectStream: [],
       listofCoach: [],
       skillset: ['associate specialist', 'specialist'],
+      items: [
+        {
+          text: 'Partners',
+          disabled: true,
+          to: '/admin/dashboard/partner',
+        },
+        {
+          text: 'Add partner',
+          disabled: false,
+          to: '/admin/dashboard/partner/add-partner',
+        },
+        {
+          text: 'Link 2',
+          disabled: true,
+          href: 'breadcrumbs_link_2',
+        },
+      ],
     }
   },
   computed: {},

@@ -111,16 +111,7 @@
               outlined
             ></v-select>
           </v-col>
-          <v-col cols="6">
-            <v-text-field
-              label="Password"
-              outlined
-              class="text-capitalize"
-              color="#13274a"
-              v-model="password"
-              readonly
-            ></v-text-field>
-          </v-col>
+         
         </v-row>
         <v-row class="mt-4 mb-4 mx-6" v-if="editmode">
           <v-col cols="12">
