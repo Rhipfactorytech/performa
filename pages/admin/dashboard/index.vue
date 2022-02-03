@@ -18,33 +18,13 @@
         <v-row justify="center" align="center" class="mb-2 mt-6">
           <v-btn
             class="text-capitalize titl-fnt-ion"
-            to="/admin/dashboard/partner"
+            to="/admin/dashboard/partner/add-partner"
             text
           >
             <v-icon color="#5465ff" dark left>mdi-plus-box</v-icon><span class="partner-push"> Add a partner</span></v-btn
           >
         </v-row>
-        <v-row justify="center" align="center" class="mb-2">
-          <v-btn
-            class="text-capitalize titl-fnt-ion"
-            text
-            to="/partners/dashboard/growth"
-          >
-            <v-icon color="#5465ff" dark left class="mr-3">mdi-plus-box</v-icon>
-            <span style="margin-right: 47px">set a growth plan</span></v-btn
-          >
-        </v-row>
-        <v-row justify="center" align="center" class="mb-2">
-          <v-btn
-            class="text-capitalize titl-fnt-ion"
-            text
-            to="/partners/dashboard/profile"
-            disabled
-          >
-            <v-icon color="#5465ff" dark left class="">mdi-plus-box</v-icon>
-            <span style="margin-right: 145px"> Profile </span></v-btn
-          >
-        </v-row>
+       
       </v-card>
     </v-row>
   </div>

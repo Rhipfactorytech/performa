@@ -16,7 +16,7 @@
       </v-list-item>
 
       <v-list shaped class="mt-4">
-        <v-list-item-group v-model="selectedItem" color="#5465ff">
+        <v-list-item-group v-model="selectedItem" color="#5465ff" class="titl-fnt-mb">
           <v-list-item v-for="(item, i) in items" :key="i" class="mt-2" :to="item.to" router
           exact>
             <v-list-item-icon>
@@ -67,7 +67,7 @@ export default {
       selectedItem: 1,
       items: [
         { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin/dashboard' },
-        { text: 'Streams', icon: 'mdi-account-group', to: '/admin/dashboard/stream'},
+        { text: 'Partners', icon: 'mdi-account-group', to: '/admin/dashboard/partner'},
         
       ],
       miniVariant: false,
@@ -86,6 +86,11 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap');
+.titl-fnt-mb {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 15px;
+}
 #bg {
   background: #e5e5e5;
 }

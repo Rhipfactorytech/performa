@@ -1,5 +1,7 @@
 <template>
   <div>
+     <v-breadcrumbs :items="item">
+     </v-breadcrumbs>
     <v-card flat class="pt-4">
       <v-row class="mt-6 mx-auto titl-fnt-mb-b2">
         <v-col cols="6">
@@ -176,7 +178,7 @@
             class="mx-auto titl-fnt-mb-b2 text-capitalize"
             block
           >
-            Add partner
+            create profile
           </v-btn>
         </v-col>
       </v-row>
@@ -272,22 +274,19 @@ export default {
         'Group Vice President',
         'Executive Vice President',
       ],
-      items: [
+      item: [
         {
-          text: 'Partners',
-          disabled: true,
+          text: 'View all partner',
+          disabled: false,
           to: '/admin/dashboard/partner',
+           exact: true,
         },
         {
-          text: 'Add partner',
-          disabled: true,
+          text: 'Add a partner',
+          disabled: false,
           to: '/admin/dashboard/partner/add-partner',
         },
-        {
-          text: 'Link 2',
-          disabled: true,
-          href: 'breadcrumbs_link_2',
-        },
+     
       ],
     }
   },
