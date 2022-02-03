@@ -1,136 +1,14 @@
 <template>
   <div>
-    <!-- edit profile -->
-    <v-card class="pt-5 mb-4" v-if="!editmode">
-      <v-row class="ml-4 mt-4 mb-4">
-        <span class="text-capitalize titl-fnt">{{ name }}'s profile</span>
-        <v-spacer />
-        <v-btn class="mr-6 text-capitalize titl-fnt-mb-b2" text @click="edit">
-          <v-icon color="#5465ff" left>mdi-pencil-outline</v-icon>edit
-        </v-btn>
-      </v-row>
-      <v-row class="mt-4 mx-auto">
-        <v-col cols="6">
-          <v-text-field
-            label="work Id"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="workid"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Work Email"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="email"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Phone number"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="phone"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Date of resumption"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="date"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Work stream"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="stream"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Designation"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="designation"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Current Skill"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="currentSkill"
-            readonly
-          ></v-text-field>
-        </v-col>
-        <v-col cols="6">
-          <v-text-field
-            label="Next Skill"
-            outlined
-            class="text-capitalize"
-            color="#13274a"
-            v-model="nextskill"
-            readonly
-          ></v-text-field>
-        </v-col>
-
-        <v-col cols="6">
-          <v-select
-            :items="listofCoach"
-            item-text="name"
-            item-value="name"
-            v-model="roleCoach1"
-            label="Role Coach 1"
-            outlined
-            readonly
-          ></v-select>
-        </v-col>
-        <v-col cols="6">
-          <v-select
-            :items="listofCoach"
-            item-text="name"
-            item-value="name"
-            v-model="roleCoach2"
-            label="Role Coach 2"
-            outlined
-            readonly
-          ></v-select>
-        </v-col>
-      </v-row>
-    </v-card>
-
-    <!-- end of edit profile -->
-
-    <v-card class="pt-5" v-if="editmode">
-      <v-row class="ml-4 mt-4 mb-4">
-        <v-spacer />
-        <v-btn class="mr-6 text-capitalize titl-fnt-mb-b2" text @click="edit">
-          <v-icon color="#5465ff" left>mdi-close-circle-outline</v-icon>close
-        </v-btn>
-      </v-row>
-      <v-row class="mt-4 mx-auto">
+     <v-breadcrumbs :items="item">
+     </v-breadcrumbs>
+    <v-card flat class="pt-4">
+      <v-row class="mt-6 mx-auto titl-fnt-mb-b2">
         <v-col cols="6">
           <v-text-field
             label="Partner name"
             outlined
-            class="text-capitalize"
+            class="text-capitalize titl-fnt-mb-b2"
             color="#13274a"
             v-model="name"
             :error-messages="nameErrors"
@@ -145,7 +23,9 @@
             class="text-capitalize"
             color="#13274a"
             v-model="workid"
-            readonly
+            :error-messages="workidErrors"
+            @input="$v.workid.$touch()"
+            @blur="$v.workid.$touch()"
           ></v-text-field>
         </v-col>
         <v-col cols="6">
@@ -256,31 +136,34 @@
             @blur="$v.nextskill.$touch()"
           ></v-select>
         </v-col>
-
         <v-col cols="6">
           <v-select
-            :items="listofCoach"
-            item-text="name"
-            item-value="name"
-            v-model="roleCoach1"
             label="Role Coach 1"
             outlined
+            class="text-capitalize"
+            color="#13274a"
+            v-model="rolecoach"
+            item-text="name"
+            item-value="name"
+            :items="listofCoach"
             :error-messages="roleCoachErrors"
-            @input="$v.roleCoach1.$touch()"
-            @blur="$v.roleCoach1.$touch()"
+            @input="$v.rolecoach.$touch()"
+            @blur="$v.rolecoach.$touch()"
           ></v-select>
         </v-col>
         <v-col cols="6">
           <v-select
-            :items="listofCoach"
-            item-text="name"
-            item-value="name"
-            v-model="roleCoach2"
             label="Role Coach 2"
             outlined
+            class="text-capitalize"
+            color="#13274a"
+            v-model="rolecoach2"
+            item-text="name"
+            item-value="name"
+            :items="listofCoach"
             :error-messages="roleCoach2Errors"
-            @input="$v.roleCoach2.$touch()"
-            @blur="$v.roleCoach2.$touch()"
+            @input="$v.rolecoach2.$touch()"
+            @blur="$v.rolecoach2.$touch()"
           ></v-select>
         </v-col>
       </v-row>
@@ -292,10 +175,10 @@
             :loading="loading"
             dark
             @click="add_partner"
-            class="mx-auto text-capitalize mb-4"
+            class="mx-auto titl-fnt-mb-b2 text-capitalize"
             block
           >
-            update {{ name }}'s profile
+            create profile
           </v-btn>
         </v-col>
       </v-row>
@@ -320,7 +203,7 @@ export default {
   mixins: [validationMixin],
   validations: {
     email: { required },
-
+    workid: { required },
     date: { required },
     phone: { required },
     name: { required },
@@ -329,21 +212,13 @@ export default {
     designation: { required },
     currentSkill: { required },
     nextskill: { required },
-    roleCoach1: { required },
-    roleCoach2: { required },
+    rolecoach: { required },
+    rolecoach2: { required },
   },
+
   data() {
     return {
-      date: '',
-      snackbar: false,
-      snackbarErr: false,
-      timeout: 7000,
-      msg: '',
-      roleCoach1: '',
-      roleCoach2: '',
-      password: '',
-      editmode: false,
-      id: this.$route.params.details,
+      date:'',
       headers: [
         {
           text: 'Partner name',
@@ -356,11 +231,7 @@ export default {
         { text: 'Status', value: 'status' },
         { text: 'view profile' },
       ],
-      body: [
-        {
-          name: 'olumide',
-        },
-      ],
+      body: [],
       loading: false,
       msg: '',
       timeout: 7000,
@@ -376,6 +247,7 @@ export default {
       currentSkill: '',
       nextskill: '',
       rolecoach: '',
+      rolecoach2: '',
       tab: null,
       ref: '',
       new_data: '',
@@ -388,10 +260,8 @@ export default {
         .toISOString()
         .substr(0, 10),
       menu2: false,
-      weekreport: [],
-      appraisal: [],
-      action: '',
-      listofCoach: '',
+      selectStream: [],
+      listofCoach: [],
       skillset: [
         'Associate Specialist',
         'Specialist',
@@ -404,16 +274,33 @@ export default {
         'Group Vice President',
         'Executive Vice President',
       ],
-      selectStream:'',
+      item: [
+        {
+          text: 'View all partner',
+          disabled: false,
+          to: '/admin/dashboard/partner',
+           exact: true,
+        },
+        {
+          text: 'Add a partner',
+          disabled: false,
+          to: '/admin/dashboard/partner/add-partner',
+        },
+     
+      ],
     }
   },
   computed: {},
   methods: {
-    edit() {
-      if (this.editmode == true) {
-        this.editmode = false
-      } else if (this.editmode == false) {
-        this.editmode = true
+    async getStream() {
+      try {
+        const res = await this.$axios.$get(
+          `${this.$config.baseUrl}admin/godmode/workstream/getstreams`
+        )
+        console.log(res.data)
+        this.selectStream = res.data
+      } catch (error) {
+        console.log(error.response)
       }
     },
     async getCoach() {
@@ -427,35 +314,13 @@ export default {
         console.log(error.response)
       }
     },
-    getColor(status) {
-      if (status >= 80 && status <= 100) return 'success'
-      else if (status >= 50 && status <= 80) return 'warning'
-      else return 'error'
-    },
-    async switchTab() {
-      this.getAppraisal()
-    },
     async getPartners() {
       try {
-        const res = await axios.get(
-          `${this.$config.baseUrl}admin/godmode/emp/view/${this.id}`
+        const res = await this.$axios.$get(
+          `${this.$config.baseUrl}admin/godmode/emp/viewall`
         )
-        console.log(res)
-        // this.body = res.data.data
-        this.name = res.data.data.name
-        this.workid = res.data.data.workid
-        this.date = res.data.data.dateofresumption
-        this.stream = res.data.data.tribe
-        this.designation = res.data.data.designation
-        this.tribe = res.data.data.tribe
-        this.phone = res.data.data.phonenumber
-        this.email = res.data.data.workemail
-        this.rolecoach = res.data.data.rolecoach
-        this.currentSkill = res.data.data.currentskill
-        this.nextskill = res.data.data.nextSkill
-        this.password = res.data.data.password
-        this.roleCoach1 = res.data.data.rolecoach1
-        this.roleCoach2 = res.data.data.rolecoach2
+        console.log(res.data)
+        this.body = res.data
       } catch (error) {
         console.log(error.response)
       }
@@ -465,8 +330,8 @@ export default {
       if (!this.$v.$invalid) {
         this.loading = true
         try {
-          const res = await axios.post(
-            `${this.$config.baseUrl}admin/godmode/emp/edit/${this.id}`,
+          const res = await this.$axios.$post(
+            `${this.$config.baseUrl}admin/godmode/emp/create`,
             {
               name: this.name,
               workid: this.workid,
@@ -477,13 +342,13 @@ export default {
               dateOfresumption: this.date,
               currentSkill: this.currentSkill,
               nextSkill: this.nextskill,
-              roleCoach1: this.roleCoach1,
-              roleCoach2: this.roleCoach2,
+              roleCoach1: this.rolecoach,
+              roleCoach2: this.rolecoach2
             }
           )
           console.log(res)
           this.loading = false
-          this.msg = res.data.msg
+          this.msg = res.msg
           this.snackbar = true
         } catch (error) {
           console.log(error.response)
@@ -493,58 +358,11 @@ export default {
         }
       }
     },
-    async getWeekly() {
-      try {
-        const res = await this.$axios.$get(
-          `${this.$config.baseUrl}partner/weeklyreport/check/${this.id}`
-        )
-        console.log(res.data)
-        this.weekreport = res.data
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
-    async takeAction() {
-      try {
-        const res = await this.$axios.$post(
-          `${this.$config.baseUrl}admin/godmode/action/${this.id}`
-        )
-        console.log(res)
-        this.action = res.msg
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
-    async getAppraisal() {
-      try {
-        const res = await this.$axios.$get(
-          `${this.$config.baseUrl}admin/godmode/appraisal/${this.tribe}/${this.workid}`
-          //`${this.$config.baseUrl}admin/godmode/appraisal/Business stream/string`
-        )
-        // console.log(res.data)
-        this.appraisal = res.data
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
-      async getStream() {
-      try {
-        const res = await this.$axios.$get(
-          `${this.$config.baseUrl}admin/godmode/workstream/getstreams`
-        )
-        console.log(res.data)
-        this.selectStream = res.data
-      } catch (error) {
-        console.log(error.response)
-      }
-    },
   },
   created() {
-    // this.getPartners()
     this.getPartners()
-    this.getWeekly()
-    this.getCoach()
     this.getStream()
+    this.getCoach()
   },
   filters: {
     formatdate(value) {
@@ -612,14 +430,14 @@ export default {
     },
     roleCoachErrors() {
       const errors = []
-      if (!this.$v.roleCoach1.$dirty) return errors
-      !this.$v.roleCoach1.required && errors.push('required')
+      if (!this.$v.rolecoach.$dirty) return errors
+      !this.$v.rolecoach.required && errors.push('required')
       return errors
     },
     roleCoach2Errors() {
       const errors = []
-      if (!this.$v.roleCoach2.$dirty) return errors
-      !this.$v.roleCoach2.required && errors.push('required')
+      if (!this.$v.rolecoach2.$dirty) return errors
+      !this.$v.rolecoach2.required && errors.push('required')
       return errors
     },
   },
@@ -658,9 +476,8 @@ a {
 }
 .titl-fnt {
   font-family: 'Urbanist', sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   color: #585960;
-  font-weight: bold;
 }
 
 .titl-fnt-mb-b-x {
