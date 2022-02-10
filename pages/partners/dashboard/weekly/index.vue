@@ -238,8 +238,15 @@ export default {
   },
   methods: {
     getweek() {
-      var getweeknum = this.$moment(this.date, 'YYYYMMDD').week()
-      if (getweeknum == 1) {
+      // var getweeknum = this.$moment(this.date, 'YYYYMMDD').week()
+      var date = new Date(this.date)
+      let adjustedDate = date.getDate() + date.getDay()
+      let prefixes = ['0', '1', '2', '3', '4', '5']
+      var getweeknum = prefixes[0 | (adjustedDate / 7)]
+
+      if (getweeknum == 0) {
+        var weeknum = 'week1'
+      } else if (getweeknum == 1) {
         var weeknum = 'week1'
       } else if (getweeknum == 2) {
         var weeknum = 'week2'
@@ -248,7 +255,7 @@ export default {
       } else if (getweeknum == 4) {
         var weeknum = 'week4'
       } else if (getweeknum == 5) {
-        var weeknum = 'week5'
+        var weeknum = 'week4'
       } else {
         alert('invalid date')
       }
@@ -340,6 +347,7 @@ export default {
   },
   created() {
     this.getmessages()
+    this.getweek()
   },
   filters: {
     formatdate(value) {

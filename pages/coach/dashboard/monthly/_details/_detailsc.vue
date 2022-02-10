@@ -68,7 +68,7 @@
 
     <v-row class="mt-10 mx-auto mb-4">
       <v-card width="100%" outlined height="450">
-        <v-row class="pt-8 mx-4">
+        <v-row class="pt-8 mx-4" v-if="!viewFeedback">
           <v-textarea
             outlined
             name="input-6-4"
@@ -77,7 +77,7 @@
             v-model="coach1f"
           ></v-textarea>
         </v-row>
-        <v-row class="mt-2 mx-4">
+        <v-row class="mt-2 mx-4" v-if="!viewFeedback">
           <v-textarea
             outlined
             name="input-6-4"
@@ -86,17 +86,51 @@
             v-model="coach1R"
           ></v-textarea>
         </v-row>
+
+        <v-row class="pt-8 mx-4" v-if="viewFeedback">
+          <v-textarea
+            outlined
+            name="input-6-4"
+            label="Your feedback"
+            class="titl-fnt-mb-b3"
+            v-model="coach1fview"
+          ></v-textarea>
+        </v-row>
+        <v-row class="mt-2 mx-4" v-if="viewFeedback">
+          <v-textarea
+            outlined
+            name="input-6-4"
+            label="Your Recommendation"
+            class="titl-fnt-mb-b3"
+            v-model="coach1Rview"
+          ></v-textarea>
+        </v-row>
         <v-row class="mt-2 mx-4">
-          <v-btn
-            class="text-capitalize"
-            color="#5465ff"
-            @click="sendFeedback"
-            x-large
-            dark
-            style="border-radius: 8px"
-            :loading="loading"
-            >save feedback</v-btn
-          >
+          <v-col>
+            <v-btn
+              class="text-capitalize"
+              color="#5465ff"
+              @click="sendFeedback"
+              x-large
+              dark
+              style="border-radius: 8px"
+              :loading="loading"
+              >save feedback</v-btn
+            >
+          </v-col>
+          <v-col>
+            <v-btn
+              class="text-capitalize"
+              color="#5465ff"
+              @click="getmessagesfeedback"
+              x-large
+              dark
+              style="border-radius: 8px"
+              :loading="loading"
+              outlined
+              >{{btnM}}</v-btn
+            >
+          </v-col>
         </v-row>
       </v-card>
     </v-row>
@@ -127,8 +161,12 @@ export default {
 
   data() {
     return {
+      btnM:"view your feedback",
+      viewFeedback: false,
       coach1f: '',
       coach1R: '',
+      coach1fview: '',
+      coach1Rview: '',
       happy: '',
       accomp: '',
       chall: '',
@@ -272,6 +310,42 @@ export default {
         console.log(error.response)
       }
     },
+    async getmessagesfeedback() {
+      if (this.coachname == this.getCoach1) {
+        try {
+          const res = await this.$axios.$get(
+            `${this.$config.baseUrl}partner/monthlycheck/get/${this.$route.query.monthid}`
+          )
+          this.coach1fview = res.data.feedbackCoach1
+
+          this.coach1Rview = res.data.recommendationCoach1
+
+          this.monthlyid = res.data.monthlyId
+        } catch (error) {
+          console.log(error.response)
+        }
+      } else if (this.coachname == this.getCoach2) {
+        try {
+          const res = await this.$axios.$get(
+            `${this.$config.baseUrl}partner/monthlycheck/get/${this.$route.query.monthid}`
+          )
+
+          this.coach1fview = res.data.feedbackCoach2
+
+          this.coach1Rview = res.data.recommendationCoach2
+          this.monthlyid = res.data.monthlyId
+        } catch (error) {
+          console.log(error.response)
+        }
+      }
+      if (this.viewFeedback == false) {
+        this.viewFeedback = true
+        this.btnM = "Give feedback"
+      } else if (this.viewFeedback == true) {
+        this.viewFeedback = false
+        this.btnM = "view your feedback"
+      }
+    },
     async getPartners() {
       try {
         const res = await axios.get(
@@ -316,6 +390,7 @@ export default {
     this.getmessages()
     this.getPartners()
     this.getCoach()
+    //this.getmessagesfeedback()
     // this.test()
   },
   filters: {

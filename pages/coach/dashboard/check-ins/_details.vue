@@ -328,7 +328,7 @@ export default {
         'November',
         'December',
       ],
-      week: ['week1', 'week2', 'week3', 'week4', 'week5'],
+      week: ['week1', 'week2', 'week3', 'week4'],
       editmode: true,
       id: this.$route.params.details,
 
