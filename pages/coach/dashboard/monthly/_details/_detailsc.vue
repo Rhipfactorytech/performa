@@ -67,7 +67,7 @@
     </v-row>
 
     <v-row class="mt-10 mx-auto mb-4">
-      <v-card width="100%" outlined height="450">
+      <v-card width="100%" outlined height="500">
         <v-row class="pt-8 mx-4" v-if="!viewFeedback">
           <v-textarea
             outlined
