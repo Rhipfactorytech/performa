@@ -194,8 +194,8 @@ export default {
         const res = await this.$axios.$post(
           `${this.$config.baseUrl}admin/godmode/monthlycheckin/create`,
           {
-            date: this.date,
-            month: this.month,
+            date: "January 28th 2022",
+            month: "January",
             areyouhappy: this.happy,
             accomplishment: this.accomp,
             challenges: this.chall,
@@ -207,7 +207,7 @@ export default {
         )
         console.log(res)
         // this.body = res.data.data
-         this.msg = res.data.msg
+         this.msg = res.msg
         this.snackbar = true
         this.loading = false
       } catch (error) {
