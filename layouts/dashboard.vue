@@ -16,23 +16,66 @@
       </v-list-item>
 
       <v-list shaped class="mt-4">
-        <v-list-item-group v-model="selectedItem" color="#5465ff" class="titl-fnt-mb">
-          <v-list-item v-for="(item, i) in items" :key="i" class="mt-2" :to="item.to" router
-          exact>
+        <v-list-item-group
+          v-model="selectedItem"
+          color="#5465ff"
+          class="titl-fnt-mb"
+        >
+          <v-list-item
+            v-for="(item, i) in items1"
+            :key="i"
+            class="mt-2"
+            :to="item.to"
+            router
+            exact
+          >
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="item.text" class=" "></v-list-item-title>
+              <v-list-item-title
+                v-text="item.text"
+                class=""
+              ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
+
+        <v-list-group
+          v-model="selectedItem"
+          color="#5465ff"
+          class="titl-fnt-mb"
+          prepend-icon="mdi-account-group"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Partners</v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            class="mt-2"
+            :to="item.to"
+            router
+          >
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title
+                v-text="item.text"
+                class=""
+              ></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
       </v-list>
       <template v-slot:append>
         <div class="pa-4">
-          <v-btn text color="#828288" @click="logout"> <v-icon left>
-        mdi-logout
-      </v-icon> Log out </v-btn>
+          <v-btn text color="#828288" @click="logout">
+            <v-icon left> mdi-logout </v-icon> Log out
+          </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -44,7 +87,7 @@
       >
 
       <v-spacer></v-spacer>
-     
+
       <v-badge color="red" dot class="mr-4">
         <v-icon color="#5465ff" small> mdi-bell </v-icon>
       </v-badge>
@@ -65,10 +108,29 @@ export default {
       drawer: true,
       fixed: true,
       selectedItem: 1,
+      items1: [
+        {
+          text: 'Dashboard',
+          icon: 'mdi-view-dashboard',
+          to: '/admin/dashboard',
+        },
+      ],
       items: [
-        { text: 'Dashboard', icon: 'mdi-view-dashboard', to: '/admin/dashboard' },
-        { text: 'Partners', icon: 'mdi-account-group', to: '/admin/dashboard/partner'},
-        
+        {
+          text: 'Add a Partner',
+          icon: 'mdi-plus-box',
+          to: '/admin/dashboard/partner/add-partner',
+        },
+        {
+          text: 'Weekly Updates',
+          icon: 'mdi-refresh',
+          to: '/admin/dashboard/check-ins',
+        },
+        {
+          text: 'Monthly Checkin',
+          icon: 'mdi-checkbox-marked-outline',
+          to: '/admin/dashboard/monthly',
+        },
       ],
       miniVariant: false,
       right: true,
@@ -76,12 +138,12 @@ export default {
       title: 'Vuetify.js',
     }
   },
-   methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$cookies.removeAll()
       this.$router.push({ name: 'admin' })
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -3,7 +3,7 @@
     <v-row justify="center" align="center" class="mt-10">
       <v-card height="550" width="600">
         <v-row justify="center" align="center" class="mt-12">
-          <p class="tit-fnt text-capitalize text-center">Hello, RFIP Factory</p>
+          <p class="tit-fnt text-capitalize text-center">Hello, RHIP Factory</p>
         </v-row>
 
         <v-row justify="center" align="center" class="">
