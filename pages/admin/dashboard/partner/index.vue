@@ -11,6 +11,7 @@
             <th class="text-left">Designation</th>
             <th class="text-left">Status</th>
             <th class="text-left">View profile</th>
+            <th class="text-left">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +25,17 @@
                 view profile
               </nuxt-link>
             </td>
+            <td>
+              <v-btn
+                text
+                class="text-capitalize"
+                x-small
+                @click="setDeteleteid(item.workId , item.name)"
+                 color="red"
+              >
+                delete partner
+              </v-btn>
+            </td>
           </tr>
         </tbody>
       </template>
@@ -35,6 +47,24 @@
     <v-snackbar v-model="snackbarErr" :timeout="timeout" color="error" top>
       {{ msg }}
     </v-snackbar>
+
+    <v-dialog v-model="dialogDelete" persistent width="400">
+      <v-card>
+        <v-card-title class="text-h6 pt-4">
+          Delete {{deletename}}?
+        </v-card-title>
+      
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red" text @click="dialogDelete = false">
+            Cancel
+          </v-btn>
+          <v-btn color="green darken-1" text @click="deletePartner()">
+            Agree
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -68,8 +98,11 @@ export default {
         { text: 'view profile' },
       ],
       body: [],
+      deleteid : "",
+      deletename:'',
       loading: false,
       msg: '',
+      dialogDelete: false,
       timeout: 7000,
       snackbar: false,
       snackbarErr: false,
@@ -114,6 +147,26 @@ export default {
   },
   computed: {},
   methods: {
+    setDeteleteid(id, name){
+        this.deleteid = id
+        this.deletename = name
+        this.dialogDelete = true
+    },
+    async deletePartner(){
+        try {
+        const res = await axios.delete(
+          `${this.$config.baseUrl}admin/godmode/delete/partner/${this.deleteid}`
+        )
+        console.log(res)
+         this.msg = res.data.message
+         this.dialogDelete = false
+          location.reload()
+        this.snackbar = true
+        } catch (error) {
+        console.log(error.response)
+      }
+
+    },
     async getStream() {
       try {
         const res = await this.$axios.$get(
@@ -193,3 +246,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+a {
+  text-decoration: none;
+}
+</style>
