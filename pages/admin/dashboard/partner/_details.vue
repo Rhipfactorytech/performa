@@ -42,6 +42,16 @@
         </v-col>
         <v-col cols="6">
           <v-text-field
+            label="Password"
+            outlined
+            class="text-capitalize"
+            color="#13274a"
+            v-model=" password"
+            readonly
+          ></v-text-field>
+        </v-col>
+        <v-col cols="6">
+          <v-text-field
             label="Date of resumption"
             outlined
             class="text-capitalize"
